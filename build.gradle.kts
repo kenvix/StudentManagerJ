@@ -73,7 +73,7 @@ dependencies {
     implementation(group = "org.apache.commons", name = "commons-dbcp2", version = "2.7.0")
 
     implementation("org.slf4j:slf4j-api:1.7.30")
-    implementation("org.slf4j:slf4j-simple:1.7.30")
+    implementation("ch.qos.logback:logback-classic:1.2.3")
     implementation("io.github.cdimascio:java-dotenv:5.1.4")
 }
 

@@ -48,7 +48,9 @@ task createJooqConfig {
 
 task cleanGeneratedSrc {
     group = "jooq"
-    project.delete(files(System.getProperty("project.generatedSrcDir")))
+    doLast {
+        project.delete(files(System.getProperty("project.generatedSrcDir")))
+    }
 }
 
 jooq {
