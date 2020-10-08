@@ -8,13 +8,12 @@ package com.kenvix.studentmanager.model.mysql;
 
 import com.kenvix.studentmanager.AppConstants;
 import com.kenvix.studentmanager.orm.tables.daos.ClassesDao;
-import com.kenvix.studentmanager.orm.tables.daos.CoursesDao;
 import org.jooq.Configuration;
 
-public class ClassesModel extends ClassesDao implements BaseModel {
-    public static final ClassesModel INSTANCE = new ClassesModel();
+public class ClassModel extends ClassesDao implements BaseModel {
+    public static final ClassModel INSTANCE = new ClassModel();
 
-    private ClassesModel() {
+    private ClassModel() {
 
     }
 

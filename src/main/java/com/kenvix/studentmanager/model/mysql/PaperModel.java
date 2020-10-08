@@ -7,14 +7,13 @@
 package com.kenvix.studentmanager.model.mysql;
 
 import com.kenvix.studentmanager.AppConstants;
-import com.kenvix.studentmanager.orm.tables.daos.CoursesDao;
 import com.kenvix.studentmanager.orm.tables.daos.PapersDao;
 import org.jooq.Configuration;
 
-public class PapersModel extends PapersDao implements BaseModel {
-    public static final PapersModel INSTANCE = new PapersModel();
+public class PaperModel extends PapersDao implements BaseModel {
+    public static final PaperModel INSTANCE = new PaperModel();
 
-    private PapersModel() {
+    private PaperModel() {
 
     }
 

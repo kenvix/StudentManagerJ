@@ -1,6 +1,7 @@
 @file:JvmName("Main")
 package com.kenvix.studentmanager
 
+import com.kenvix.SimpleStudentManager
 import com.kenvix.web.utils.ConsoleCommands
 import com.kenvix.web.utils.ExceptionHandler
 import com.kenvix.studentmanager.server.WebServer
@@ -32,7 +33,7 @@ object Main : CoroutineScope {
 
         // Backend support
         // Backend.connectAndRetry()
-
+        SimpleStudentManager().setup()
         beginReadSystemConsole()
     }
 

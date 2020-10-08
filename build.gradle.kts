@@ -75,6 +75,8 @@ dependencies {
     implementation("org.slf4j:slf4j-api:1.7.30")
     implementation("ch.qos.logback:logback-classic:1.2.3")
     implementation("io.github.cdimascio:java-dotenv:5.1.4")
+    implementation("io.javalin:javalin:3.11.0")
+    implementation("org.freemarker:freemarker:2.3.30")
 }
 
 // Add generated build-config directories to the main source set, so that the
