@@ -12,6 +12,11 @@ plugins {
     id("java-library")
 }
 
+val ktorVersion: String by project
+val kotlinVersion: String by project
+val kotlinxCoroutinesVersion: String by project
+val logbackVersion: String by project
+
 /*********************************************************************/
 /**                 Application Basic Information                   **/
 /*********************************************************************/
@@ -66,6 +71,10 @@ dependencies {
     implementation(group = "org.xerial", name = "sqlite-jdbc", version = "3.25.2")
     implementation(group = "mysql", name = "mysql-connector-java", version = "8.0.17")
     implementation(group = "org.apache.commons", name = "commons-dbcp2", version = "2.7.0")
+
+    implementation("org.slf4j:slf4j-api:1.7.30")
+    implementation("org.slf4j:slf4j-simple:1.7.30")
+    implementation("io.github.cdimascio:java-dotenv:5.1.4")
 }
 
 // Add generated build-config directories to the main source set, so that the
@@ -150,6 +159,7 @@ tasks {
     withType<KotlinCompile> {
         kotlinOptions.jvmTarget = sourceCompatibility
         kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
+        kotlinOptions.freeCompilerArgs += "-Xjvm-default=enable"
     }
 
     withType<JavaCompile> {
