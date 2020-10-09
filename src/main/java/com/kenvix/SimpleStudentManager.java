@@ -91,10 +91,9 @@ final public class SimpleStudentManager {
 
         app.get("/paper", ctx -> {
             var papers = switch (Objects.requireNonNull(ctx.queryParam("filter", ""))) {
-                case "person_id" -> PaperModel.INSTANCE.fetchByPersonId(Long.valueOf(Objects.requireNonNull(ctx.queryParam("person_id", ""))));
-                default -> PaperModel.INSTANCE.findAll();
+                case "person_id" -> PaperModel.INSTANCE.fetchWithPersonByPersonId(Long.valueOf(Objects.requireNonNull(ctx.queryParam("person_id", ""))));
+                default -> PaperModel.INSTANCE.fetchAllWithPerson();
             };
-
 
             render(ctx, "paper_list", Map.of("papers", papers));
         });
@@ -106,7 +105,9 @@ final public class SimpleStudentManager {
 
         app.post("/paper/add", ctx -> {
             var paper = new Papers();
-
+            updatePaper(ctx, paper);
+            PaperModel.INSTANCE.insert(paper);
+            renderOk(ctx);
         });
 
         app.get("/paper/edit/:id", ctx -> {
@@ -116,7 +117,9 @@ final public class SimpleStudentManager {
 
         app.post("/paper/edit/:id", ctx -> {
             var paper = Tools.assertNotEmpty(PaperModel.INSTANCE.fetchById(Long.valueOf(ctx.pathParam("id")))).get(0);
-
+            updatePaper(ctx, paper);
+            PaperModel.INSTANCE.update(paper);
+            renderOk(ctx);
         });
 
         app.get("/class", ctx -> {
@@ -148,6 +151,8 @@ final public class SimpleStudentManager {
         app.post("/class/edit/:id", ctx -> {
             var clazz = Tools.assertNotEmpty(ClassModel.INSTANCE.fetchById(Long.valueOf(ctx.pathParam("id")))).get(0);
             updateClass(ctx, clazz);
+            ClassModel.INSTANCE.update(clazz);
+            renderOk(ctx);
         });
 
         app.get("/person", ctx -> {
@@ -188,11 +193,18 @@ final public class SimpleStudentManager {
     private void updateClass(Context ctx, Classes clazz) {
         var params = ctx.formParamMap();
 
-        if (params.containsKey("id") && !params.get("id").get(0).isBlank())
-            clazz.setId(Long.valueOf(Tools.assertNotEmpty(params.get("id")).get(0)));
-
         clazz.setId(Long.valueOf(Tools.assertNotEmpty(params.get("class_id")).get(0)));
         clazz.setMasterId(Long.valueOf(Tools.assertNotEmpty(params.get("master_id")).get(0)));
+    }
+
+    private void updatePaper(Context ctx, Papers paper) {
+        var params = ctx.formParamMap();
+
+        if (params.containsKey("id") && !params.get("id").get(0).isBlank())
+            paper.setId(Long.valueOf(Tools.assertNotEmpty(params.get("id")).get(0)));
+
+        paper.setPersonId(Long.valueOf(Tools.assertNotEmpty(params.get("person_id")).get(0)));
+        paper.setTitle(Tools.assertNotEmpty(params.get("title")).get(0));
     }
 
     private void updatePerson(Context ctx, Persons person) {

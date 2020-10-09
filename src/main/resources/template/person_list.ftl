@@ -42,7 +42,7 @@
                 <a href="/class/?filter=class_id&class_id=${item.clazz}">班级</a>
                 <a href="/person/?filter=class_id&class_id=${item.clazz}">筛选</a>
                 <a href="/paper/${item.id}">论文</a>
-                <a href="/course/${item.id}">课程</a>
+                <a href="/course/?filter=class_id&class_id=${item.clazz}">课程</a>
                 <a href="/person/edit/${item.id}">修改</a>
                 <a href="/person/delete/${item.id}" onclick="return confirm('真要删？')">删</a>
             </td>

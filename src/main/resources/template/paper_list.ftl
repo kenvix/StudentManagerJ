@@ -21,11 +21,12 @@
     </thead>
 
     <tbody>
-    <#list classes as item>
+    <#list papers as item>
         <tr>
             <td>${item.id}</td>
-            <td>${item.masterName}</td>
-            <td>${item.masterId}</td>
+            <td>${item.personId}</td>
+            <td>${item.personName}</td>
+            <td>${item.title}</td>
             <td>
                 <a href="/person/?filter=person_id&person_id=${item.personId}">人员</a>
                 <a href="/paper/?filter=person_id&person_id=${item.personId}">筛选</a>
@@ -42,7 +43,7 @@
     <p>
         <label>
             编号
-            <input type="number" name="class_id" value="">
+            <input type="number" name="id" value="">
         </label>
     </p>
 
@@ -56,7 +57,7 @@
     <p>
         <label>
             论文标题
-            <input type="text" name="titlke" value="">
+            <input type="text" name="title" value="">
         </label>
     </p>
 

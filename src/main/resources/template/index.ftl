@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>学生管理系统</title>
+    <title>管理系统</title>
     <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
