@@ -43,7 +43,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ClassCourseMap extends TableImpl<ClassCourseMapRecord> {
 
-    private static final long serialVersionUID = 463080515;
+    private static final long serialVersionUID = -275101478;
 
     /**
      * The reference instance of <code>class_course_map</code>
@@ -113,7 +113,7 @@ public class ClassCourseMap extends TableImpl<ClassCourseMapRecord> {
 
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.CLASS_COURSE_MAP_BY_CLASS_ID);
+        return Arrays.<Index>asList(Indexes.CLASS_COURSE_MAP_BY_CLASS_ID, Indexes.CLASS_COURSE_MAP_ON_COURSE_DELETE);
     }
 
     @Override
@@ -129,6 +129,19 @@ public class ClassCourseMap extends TableImpl<ClassCourseMapRecord> {
     @Override
     public List<UniqueKey<ClassCourseMapRecord>> getKeys() {
         return Arrays.<UniqueKey<ClassCourseMapRecord>>asList(Keys.KEY_CLASS_COURSE_MAP_PRIMARY);
+    }
+
+    @Override
+    public List<ForeignKey<ClassCourseMapRecord, ?>> getReferences() {
+        return Arrays.<ForeignKey<ClassCourseMapRecord, ?>>asList(Keys.ON_CLASS_DELETE, Keys.ON_COURSE_DELETE);
+    }
+
+    public Classes classes() {
+        return new Classes(this, Keys.ON_CLASS_DELETE);
+    }
+
+    public Courses courses() {
+        return new Courses(this, Keys.ON_COURSE_DELETE);
     }
 
     @Override

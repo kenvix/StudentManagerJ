@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>学生管理系统</title>
+    <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
 <h1>操作成功</h1>

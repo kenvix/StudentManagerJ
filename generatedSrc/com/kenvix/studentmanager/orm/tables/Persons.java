@@ -23,7 +23,7 @@ import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row6;
+import org.jooq.Row7;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -47,7 +47,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Persons extends TableImpl<PersonsRecord> {
 
-    private static final long serialVersionUID = 1052731617;
+    private static final long serialVersionUID = 1000323143;
 
     /**
      * The reference instance of <code>persons</code>
@@ -91,6 +91,11 @@ public class Persons extends TableImpl<PersonsRecord> {
      * The column <code>persons.status</code>.
      */
     public final TableField<PersonsRecord, PersonsStatus> STATUS = createField(DSL.name("status"), org.jooq.impl.SQLDataType.VARCHAR(9).nullable(false).defaultValue(org.jooq.impl.DSL.inline("normal", org.jooq.impl.SQLDataType.VARCHAR)).asEnumDataType(com.kenvix.studentmanager.orm.enums.PersonsStatus.class), this, "");
+
+    /**
+     * The column <code>persons.clazz</code>.
+     */
+    public final TableField<PersonsRecord, Long> CLAZZ = createField(DSL.name("clazz"), org.jooq.impl.SQLDataType.BIGINT.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.BIGINT)), this, "");
 
     /**
      * Create a <code>persons</code> table reference
@@ -177,11 +182,11 @@ public class Persons extends TableImpl<PersonsRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row6 type methods
+    // Row7 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row6<Long, String, PersonsSex, PersonsType, Byte, PersonsStatus> fieldsRow() {
-        return (Row6) super.fieldsRow();
+    public Row7<Long, String, PersonsSex, PersonsType, Byte, PersonsStatus, Long> fieldsRow() {
+        return (Row7) super.fieldsRow();
     }
 }

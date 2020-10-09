@@ -14,7 +14,9 @@ public class ClassCourseMapModel extends CoursesDao implements BaseModel {
     public static final ClassCourseMapModel INSTANCE = new ClassCourseMapModel();
 
     private ClassCourseMapModel() {
-
+        var a = 0;
+        var b = 0;
+        b = 1;
     }
 
     @Override

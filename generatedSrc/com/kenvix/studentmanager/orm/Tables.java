@@ -10,7 +10,6 @@ import com.kenvix.studentmanager.orm.tables.Courses;
 import com.kenvix.studentmanager.orm.tables.Papers;
 import com.kenvix.studentmanager.orm.tables.PeopleStudent;
 import com.kenvix.studentmanager.orm.tables.Persons;
-import com.kenvix.studentmanager.orm.tables.StudentClassMap;
 
 import javax.annotation.processing.Generated;
 
@@ -57,9 +56,4 @@ public class Tables {
      * View 'student_manager.people_student' references invalid table(s) or column(s) or function(s) or definer/invoker of view lack rights to use them
      */
     public static final Persons PERSONS = Persons.PERSONS;
-
-    /**
-     * View 'student_manager.people_student' references invalid table(s) or column(s) or function(s) or definer/invoker of view lack rights to use them
-     */
-    public static final StudentClassMap STUDENT_CLASS_MAP = StudentClassMap.STUDENT_CLASS_MAP;
 }

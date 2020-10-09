@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>学生管理系统</title>
+    <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
-<h1>学生管理系统</h1>
+<h1>人员列表</h1>
+<p><a href="/">首页</a></p>
 
 <table>
     <thead>
@@ -30,7 +32,7 @@
             <td>${item.isGraduable}</td>
             <td>${item.status}</td>
             <td>
-                <a href="/class/${item.id}">班级</a>
+                <a href="/class/?filter=person_id&person_id=${item.id}">班级</a>
                 <a href="/paper/${item.id}">论文</a>
                 <a href="/course/${item.id}">课程</a>
                 <a href="/person/edit/${item.id}">修改</a>
@@ -41,12 +43,12 @@
     </tbody>
 </table>
 
-<h1>添加人</h1>
+<h1>添加人员</h1>
 <form action="/person/add" method="post">
     <p>
         <label>
-            学号
-            <input type="text" name="id">
+            工号
+            <input type="number" name="id">
         </label>
     </p>
 
@@ -60,7 +62,11 @@
     <p>
         <label>
             性别
-            <input type="text" name="sex">
+            <select name="sex">
+                <option value="unknown">unknown</option>
+                <option value="male">male</option>
+                <option value="female">female</option>
+            </select>
         </label>
     </p>
 
@@ -96,7 +102,7 @@
     <p>
         <label>
             班级
-            <input type="text" name="class_id">
+            <input type="number" name="class_id">
         </label>
     </p>
 

@@ -9,16 +9,15 @@ import com.kenvix.studentmanager.orm.tables.Classes;
 import com.kenvix.studentmanager.orm.tables.Courses;
 import com.kenvix.studentmanager.orm.tables.Papers;
 import com.kenvix.studentmanager.orm.tables.Persons;
-import com.kenvix.studentmanager.orm.tables.StudentClassMap;
 import com.kenvix.studentmanager.orm.tables.records.ClassCourseMapRecord;
 import com.kenvix.studentmanager.orm.tables.records.ClassesRecord;
 import com.kenvix.studentmanager.orm.tables.records.CoursesRecord;
 import com.kenvix.studentmanager.orm.tables.records.PapersRecord;
 import com.kenvix.studentmanager.orm.tables.records.PersonsRecord;
-import com.kenvix.studentmanager.orm.tables.records.StudentClassMapRecord;
 
 import javax.annotation.processing.Generated;
 
+import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
@@ -48,7 +47,6 @@ public class Keys {
     public static final Identity<CoursesRecord, Long> IDENTITY_COURSES = Identities0.IDENTITY_COURSES;
     public static final Identity<PapersRecord, Long> IDENTITY_PAPERS = Identities0.IDENTITY_PAPERS;
     public static final Identity<PersonsRecord, Long> IDENTITY_PERSONS = Identities0.IDENTITY_PERSONS;
-    public static final Identity<StudentClassMapRecord, Long> IDENTITY_STUDENT_CLASS_MAP = Identities0.IDENTITY_STUDENT_CLASS_MAP;
 
     // -------------------------------------------------------------------------
     // UNIQUE and PRIMARY KEY definitions
@@ -59,12 +57,14 @@ public class Keys {
     public static final UniqueKey<CoursesRecord> KEY_COURSES_PRIMARY = UniqueKeys0.KEY_COURSES_PRIMARY;
     public static final UniqueKey<PapersRecord> KEY_PAPERS_PRIMARY = UniqueKeys0.KEY_PAPERS_PRIMARY;
     public static final UniqueKey<PersonsRecord> KEY_PERSONS_PRIMARY = UniqueKeys0.KEY_PERSONS_PRIMARY;
-    public static final UniqueKey<StudentClassMapRecord> KEY_STUDENT_CLASS_MAP_PRIMARY = UniqueKeys0.KEY_STUDENT_CLASS_MAP_PRIMARY;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final ForeignKey<ClassCourseMapRecord, ClassesRecord> ON_CLASS_DELETE = ForeignKeys0.ON_CLASS_DELETE;
+    public static final ForeignKey<ClassCourseMapRecord, CoursesRecord> ON_COURSE_DELETE = ForeignKeys0.ON_COURSE_DELETE;
+    public static final ForeignKey<PapersRecord, PersonsRecord> ON_PERSON_DELETE = ForeignKeys0.ON_PERSON_DELETE;
 
     // -------------------------------------------------------------------------
     // [#1459] distribute members to avoid static initialisers > 64kb
@@ -76,7 +76,6 @@ public class Keys {
         public static Identity<CoursesRecord, Long> IDENTITY_COURSES = Internal.createIdentity(Courses.COURSES, Courses.COURSES.ID);
         public static Identity<PapersRecord, Long> IDENTITY_PAPERS = Internal.createIdentity(Papers.PAPERS, Papers.PAPERS.ID);
         public static Identity<PersonsRecord, Long> IDENTITY_PERSONS = Internal.createIdentity(Persons.PERSONS, Persons.PERSONS.ID);
-        public static Identity<StudentClassMapRecord, Long> IDENTITY_STUDENT_CLASS_MAP = Internal.createIdentity(StudentClassMap.STUDENT_CLASS_MAP, StudentClassMap.STUDENT_CLASS_MAP.ID);
     }
 
     private static class UniqueKeys0 {
@@ -85,6 +84,11 @@ public class Keys {
         public static final UniqueKey<CoursesRecord> KEY_COURSES_PRIMARY = Internal.createUniqueKey(Courses.COURSES, "KEY_courses_PRIMARY", new TableField[] { Courses.COURSES.ID }, true);
         public static final UniqueKey<PapersRecord> KEY_PAPERS_PRIMARY = Internal.createUniqueKey(Papers.PAPERS, "KEY_papers_PRIMARY", new TableField[] { Papers.PAPERS.ID }, true);
         public static final UniqueKey<PersonsRecord> KEY_PERSONS_PRIMARY = Internal.createUniqueKey(Persons.PERSONS, "KEY_persons_PRIMARY", new TableField[] { Persons.PERSONS.ID }, true);
-        public static final UniqueKey<StudentClassMapRecord> KEY_STUDENT_CLASS_MAP_PRIMARY = Internal.createUniqueKey(StudentClassMap.STUDENT_CLASS_MAP, "KEY_student_class_map_PRIMARY", new TableField[] { StudentClassMap.STUDENT_CLASS_MAP.ID }, true);
+    }
+
+    private static class ForeignKeys0 {
+        public static final ForeignKey<ClassCourseMapRecord, ClassesRecord> ON_CLASS_DELETE = Internal.createForeignKey(Keys.KEY_CLASSES_PRIMARY, ClassCourseMap.CLASS_COURSE_MAP, "on_class_delete", new TableField[] { ClassCourseMap.CLASS_COURSE_MAP.CLASS_ID }, true);
+        public static final ForeignKey<ClassCourseMapRecord, CoursesRecord> ON_COURSE_DELETE = Internal.createForeignKey(Keys.KEY_COURSES_PRIMARY, ClassCourseMap.CLASS_COURSE_MAP, "on_course_delete", new TableField[] { ClassCourseMap.CLASS_COURSE_MAP.COURSE_ID }, true);
+        public static final ForeignKey<PapersRecord, PersonsRecord> ON_PERSON_DELETE = Internal.createForeignKey(Keys.KEY_PERSONS_PRIMARY, Papers.PAPERS, "on_person_delete", new TableField[] { Papers.PAPERS.PERSON_ID }, true);
     }
 }

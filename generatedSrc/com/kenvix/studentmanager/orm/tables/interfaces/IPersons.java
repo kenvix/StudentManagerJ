@@ -87,6 +87,16 @@ public interface IPersons extends Serializable {
      */
     public PersonsStatus getStatus();
 
+    /**
+     * Setter for <code>persons.clazz</code>.
+     */
+    public IPersons setClazz(Long value);
+
+    /**
+     * Getter for <code>persons.clazz</code>.
+     */
+    public Long getClazz();
+
     // -------------------------------------------------------------------------
     // FROM and INTO
     // -------------------------------------------------------------------------

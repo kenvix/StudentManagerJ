@@ -43,7 +43,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Papers extends TableImpl<PapersRecord> {
 
-    private static final long serialVersionUID = 1290799769;
+    private static final long serialVersionUID = 1324719593;
 
     /**
      * The reference instance of <code>papers</code>
@@ -129,6 +129,15 @@ public class Papers extends TableImpl<PapersRecord> {
     @Override
     public List<UniqueKey<PapersRecord>> getKeys() {
         return Arrays.<UniqueKey<PapersRecord>>asList(Keys.KEY_PAPERS_PRIMARY);
+    }
+
+    @Override
+    public List<ForeignKey<PapersRecord, ?>> getReferences() {
+        return Arrays.<ForeignKey<PapersRecord, ?>>asList(Keys.ON_PERSON_DELETE);
+    }
+
+    public Persons persons() {
+        return new Persons(this, Keys.ON_PERSON_DELETE);
     }
 
     @Override

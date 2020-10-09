@@ -10,7 +10,6 @@ import com.kenvix.studentmanager.orm.tables.Courses;
 import com.kenvix.studentmanager.orm.tables.Papers;
 import com.kenvix.studentmanager.orm.tables.PeopleStudent;
 import com.kenvix.studentmanager.orm.tables.Persons;
-import com.kenvix.studentmanager.orm.tables.StudentClassMap;
 
 import java.util.Arrays;
 import java.util.List;
@@ -35,7 +34,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class DefaultSchema extends SchemaImpl {
 
-    private static final long serialVersionUID = 1064460320;
+    private static final long serialVersionUID = -324265090;
 
     /**
      * The reference instance of <code>DEFAULT_SCHEMA</code>
@@ -73,11 +72,6 @@ public class DefaultSchema extends SchemaImpl {
     public final Persons PERSONS = Persons.PERSONS;
 
     /**
-     * View 'student_manager.people_student' references invalid table(s) or column(s) or function(s) or definer/invoker of view lack rights to use them
-     */
-    public final StudentClassMap STUDENT_CLASS_MAP = StudentClassMap.STUDENT_CLASS_MAP;
-
-    /**
      * No further instances allowed
      */
     private DefaultSchema() {
@@ -98,7 +92,6 @@ public class DefaultSchema extends SchemaImpl {
             Courses.COURSES,
             Papers.PAPERS,
             PeopleStudent.PEOPLE_STUDENT,
-            Persons.PERSONS,
-            StudentClassMap.STUDENT_CLASS_MAP);
+            Persons.PERSONS);
     }
 }

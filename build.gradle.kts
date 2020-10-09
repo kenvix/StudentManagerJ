@@ -44,7 +44,7 @@ systemProperties.setProperty("project.jooqPropFile", "jooq.properties")
 /*********************************************************************/
 
 configure<JavaPluginConvention> {
-    this.sourceCompatibility = org.gradle.api.JavaVersion.VERSION_11
+    this.sourceCompatibility = org.gradle.api.JavaVersion.VERSION_15
 }
 
 
@@ -77,6 +77,7 @@ dependencies {
     implementation("io.github.cdimascio:java-dotenv:5.1.4")
     implementation("io.javalin:javalin:3.11.0")
     implementation("org.freemarker:freemarker:2.3.30")
+    testImplementation(kotlin("script-runtime"))
 }
 
 // Add generated build-config directories to the main source set, so that the
@@ -159,7 +160,7 @@ apply(from = "enableJooq.gradle")
 
 tasks {
     withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = sourceCompatibility
+        kotlinOptions.jvmTarget = "1.8"
         kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
         kotlinOptions.freeCompilerArgs += "-Xjvm-default=enable"
     }

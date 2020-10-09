@@ -26,7 +26,7 @@ import javax.annotation.processing.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Persons implements IPersons {
 
-    private static final long serialVersionUID = -946655758;
+    private static final long serialVersionUID = -631016397;
 
     private Long          id;
     private String        name;
@@ -34,6 +34,7 @@ public class Persons implements IPersons {
     private PersonsType   type;
     private Byte          isGraduable;
     private PersonsStatus status;
+    private Long          clazz;
 
     public Persons() {}
 
@@ -44,6 +45,7 @@ public class Persons implements IPersons {
         this.type = value.getType();
         this.isGraduable = value.getIsGraduable();
         this.status = value.getStatus();
+        this.clazz = value.getClazz();
     }
 
     public Persons(
@@ -52,7 +54,8 @@ public class Persons implements IPersons {
         PersonsSex    sex,
         PersonsType   type,
         Byte          isGraduable,
-        PersonsStatus status
+        PersonsStatus status,
+        Long          clazz
     ) {
         this.id = id;
         this.name = name;
@@ -60,6 +63,7 @@ public class Persons implements IPersons {
         this.type = type;
         this.isGraduable = isGraduable;
         this.status = status;
+        this.clazz = clazz;
     }
 
     @Override
@@ -129,6 +133,17 @@ public class Persons implements IPersons {
     }
 
     @Override
+    public Long getClazz() {
+        return this.clazz;
+    }
+
+    @Override
+    public Persons setClazz(Long clazz) {
+        this.clazz = clazz;
+        return this;
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Persons (");
 
@@ -138,6 +153,7 @@ public class Persons implements IPersons {
         sb.append(", ").append(type);
         sb.append(", ").append(isGraduable);
         sb.append(", ").append(status);
+        sb.append(", ").append(clazz);
 
         sb.append(")");
         return sb.toString();
@@ -155,6 +171,7 @@ public class Persons implements IPersons {
         setType(from.getType());
         setIsGraduable(from.getIsGraduable());
         setStatus(from.getStatus());
+        setClazz(from.getClazz());
     }
 
     @Override

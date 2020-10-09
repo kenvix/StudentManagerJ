@@ -141,4 +141,18 @@ public class PersonsDao extends DAOImpl<PersonsRecord, com.kenvix.studentmanager
     public List<com.kenvix.studentmanager.orm.tables.pojos.Persons> fetchByStatus(PersonsStatus... values) {
         return fetch(Persons.PERSONS.STATUS, values);
     }
+
+    /**
+     * Fetch records that have <code>clazz BETWEEN lowerInclusive AND upperInclusive</code>
+     */
+    public List<com.kenvix.studentmanager.orm.tables.pojos.Persons> fetchRangeOfClazz(Long lowerInclusive, Long upperInclusive) {
+        return fetchRange(Persons.PERSONS.CLAZZ, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>clazz IN (values)</code>
+     */
+    public List<com.kenvix.studentmanager.orm.tables.pojos.Persons> fetchByClazz(Long... values) {
+        return fetch(Persons.PERSONS.CLAZZ, values);
+    }
 }
