@@ -7,8 +7,13 @@
 </head>
 <body>
 <h1>人员列表</h1>
-<p><a href="/">首页</a></p>
-
+<p>
+    <a href="/">首页</a>
+    <a href="/person">全体人员</a>
+    <a href="/person/?filter=type&type=teacher">仅教师</a>
+    <a href="/person/?filter=type&type=student_undergraduate">仅本科生</a>
+    <a href="/person/?filter=type&type=student_postgraduate">仅研究生</a>
+</p>
 <table>
     <thead>
         <tr>
@@ -16,6 +21,7 @@
             <th>姓名</th>
             <th>性别</th>
             <th>类型</th>
+            <th>班级</th>
             <th>可毕业</th>
             <th>状态</th>
             <th>操作</th>
@@ -27,12 +33,14 @@
         <tr>
             <td>${item.id}</td>
             <td>${item.name}</td>
-            <td>${item.sex}</td>
-            <td>${item.type}</td>
-            <td>${item.isGraduable}</td>
-            <td>${item.status}</td>
+            <td>${names.sex[item.sex]}</td>
+            <td>${names.type[item.type]}</td>
+            <td>${item.clazz}</td>
+            <td>${names.intbool[item.isGraduable?c]}</td>
+            <td>${names.status[item.status]}</td>
             <td>
-                <a href="/class/?filter=person_id&person_id=${item.id}">班级</a>
+                <a href="/class/?filter=class_id&class_id=${item.clazz}">班级</a>
+                <a href="/person/?filter=class_id&class_id=${item.clazz}">筛选</a>
                 <a href="/paper/${item.id}">论文</a>
                 <a href="/course/${item.id}">课程</a>
                 <a href="/person/edit/${item.id}">修改</a>
@@ -63,9 +71,9 @@
         <label>
             性别
             <select name="sex">
-                <option value="unknown">unknown</option>
-                <option value="male">male</option>
-                <option value="female">female</option>
+                <option value="unknown">${names.sex.unknown}</option>
+                <option value="male">${names.sex.male}</option>
+                <option value="female">${names.sex.female}</option>
             </select>
         </label>
     </p>
@@ -74,9 +82,9 @@
         <label>
             类型
             <select name="type">
-                <option value="teacher">teacher</option>
-                <option value="student_undergraduate">student_undergraduate</option>
-                <option value="student_postgraduate">student_postgraduate</option>
+                <option value="teacher">${names.type.teacher}</option>
+                <option value="student_undergraduate">${names.type.student_undergraduate}</option>
+                <option value="student_postgraduate">${names.type.student_postgraduate}</option>
             </select>
         </label>
     </p>
@@ -85,9 +93,9 @@
         <label>
             状态
             <select name="status">
-                <option value="normal">normal</option>
-                <option value="graduated">graduated</option>
-                <option value="dropped">dropped</option>
+                <option value="normal">${names.status.normal}</option>
+                <option value="dropped">${names.status.dropped}</option>
+                <option value="graduated">${names.status.graduated}</option>
             </select>
         </label>
     </p>
@@ -107,7 +115,7 @@
     </p>
 
     <p>
-         <input type="submit">
+        <input type="submit">
     </p>
 </form>
 

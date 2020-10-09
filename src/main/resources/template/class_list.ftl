@@ -15,7 +15,6 @@
         <th>班号</th>
         <th>班主任姓名</th>
         <th>班主任工号</th>
-        <th>学生数量</th>
         <th>操作</th>
     </tr>
     </thead>
@@ -26,9 +25,9 @@
             <td>${item.id}</td>
             <td>${item.masterName}</td>
             <td>${item.masterId}</td>
-            <td>${item.studentNum}</td>
             <td>
-                <a href="/person/?class_id=${item.id}">学生</a>
+                <a href="/person/?filter=class_id&class_id=${item.id}">学生</a>
+                <a href="/class/edit/${item.id}">修改</a>
                 <a href="/person/delete/${item.id}" onclick="return confirm('真要删？')">删</a>
             </td>
         </tr>
@@ -41,14 +40,14 @@
     <p>
         <label>
             班号
-            <input type="number" name="class_id">
+            <input type="number" name="class_id" value="">
         </label>
     </p>
 
     <p>
         <label>
             班主任工号
-            <input type="number" name="master_id">
+            <input type="number" name="master_id" value="">
         </label>
     </p>
 
