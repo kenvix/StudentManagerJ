@@ -4,13 +4,14 @@
 // Written by Kenvix <i@kenvix.com>
 //--------------------------------------------------
 
-package com.kenvix;
+package com.kenvix.studentmanager.http.controller;
 
 import com.kenvix.studentmanager.model.mysql.*;
 import com.kenvix.studentmanager.orm.enums.PersonsSex;
 import com.kenvix.studentmanager.orm.enums.PersonsStatus;
 import com.kenvix.studentmanager.orm.enums.PersonsType;
 import com.kenvix.studentmanager.orm.tables.pojos.Classes;
+import com.kenvix.studentmanager.orm.tables.pojos.Courses;
 import com.kenvix.studentmanager.orm.tables.pojos.Papers;
 import com.kenvix.studentmanager.orm.tables.pojos.Persons;
 import com.kenvix.utils.preferences.ServerEnv;
@@ -87,6 +88,38 @@ final public class SimpleStudentManager {
 
         app.get("/", ctx -> {
             render(ctx, "index");
+        });
+
+        app.get("/course", ctx -> {
+            var courses = switch (Objects.requireNonNull(ctx.queryParam("filter", ""))) {
+                default -> CourseModel.INSTANCE.findAll();
+            };
+
+            render(ctx, "course_list", Map.of("courses", courses));
+        });
+
+        app.get("/course/delete/:id", ctx -> {
+            CourseModel.INSTANCE.deleteById(Long.valueOf(ctx.pathParam("id")));
+            renderOk(ctx);
+        });
+
+        app.post("/course/add", ctx -> {
+            var course = new Courses();
+            updateCourse(ctx, course);
+            CourseModel.INSTANCE.insert(course);
+            renderOk(ctx);
+        });
+
+        app.get("/course/edit/:id", ctx -> {
+            var course = Tools.assertNotEmpty(CourseModel.INSTANCE.fetchById(Long.valueOf(ctx.pathParam("id")))).get(0);
+            render(ctx, "course_edit", Map.of("course", course));
+        });
+
+        app.post("/course/edit/:id", ctx -> {
+            var course = Tools.assertNotEmpty(CourseModel.INSTANCE.fetchById(Long.valueOf(ctx.pathParam("id")))).get(0);
+            updateCourse(ctx, course);
+            CourseModel.INSTANCE.update(course);
+            renderOk(ctx);
         });
 
         app.get("/paper", ctx -> {
@@ -195,6 +228,13 @@ final public class SimpleStudentManager {
 
         clazz.setId(Long.valueOf(Tools.assertNotEmpty(params.get("class_id")).get(0)));
         clazz.setMasterId(Long.valueOf(Tools.assertNotEmpty(params.get("master_id")).get(0)));
+    }
+
+    private void updateCourse(Context ctx, Courses clazz) {
+        var params = ctx.formParamMap();
+
+        clazz.setId(Long.valueOf(Tools.assertNotEmpty(params.get("id")).get(0)));
+        clazz.setName(Tools.assertNotEmpty(params.get("name")).get(0));
     }
 
     private void updatePaper(Context ctx, Papers paper) {

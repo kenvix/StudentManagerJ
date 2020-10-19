@@ -1,7 +1,7 @@
 @file:JvmName("Main")
 package com.kenvix.studentmanager
 
-import com.kenvix.SimpleStudentManager
+import com.kenvix.studentmanager.http.controller.SimpleStudentManager
 import com.kenvix.web.utils.ConsoleCommands
 import com.kenvix.web.utils.ExceptionHandler
 import com.kenvix.studentmanager.server.WebServer

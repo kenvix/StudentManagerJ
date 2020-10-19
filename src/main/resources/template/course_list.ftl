@@ -23,10 +23,9 @@
         <tr>
             <td>${item.id}</td>
             <td>${item.name}</td>
-            <td>${item.masterId}</td>
             <td>
-                <a href="/class/edit/${item.id}">修改</a>
-                <a href="/person/delete/${item.id}" onclick="return confirm('真要删？')">删</a>
+                <a href="/course/edit/${item.id}">修改</a>
+                <a href="/course/delete/${item.id}" onclick="return confirm('真要删？')">删</a>
             </td>
         </tr>
     </#list>
@@ -34,18 +33,18 @@
 </table>
 
 <h1>添加课程</h1>
-<form action="/class/add" method="post">
+<form action="/course/add" method="post">
     <p>
         <label>
-            班号
-            <input type="number" name="class_id" value="">
+            编号
+            <input type="number" name="id" value="">
         </label>
     </p>
 
     <p>
         <label>
-            班主任工号
-            <input type="number" name="master_id" value="">
+            名称
+            <input type="number" name="name" value="">
         </label>
     </p>
 
